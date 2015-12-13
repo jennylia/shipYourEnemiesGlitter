@@ -37,25 +37,26 @@ app.get('/send', function(req, res)
     console.log(req.query);
     console.log("req query end");
     // do the var for html here
+    var photos = 1;
     var mailOptions = {
         from: 'Jenny',
         to: req.query.to,
-        subject: req.query.subject,
+        subject: "Funny cat mail",
         text: req.query.text,
         html: '<a href="http://thecatapi.com"><img src="http://thecatapi.com/api/images/get?format=src&type=gif"></a>'
     }
 
     console.log(mailOptions);
-    console.log("adding to firebase");
-    myFirebaseRef.set({
-        title: "Hello World!",
-        author: "Firebase",
-        location: {
-            city: "San Francisco",
-            state: "California",
-            zip: 94103
-        }
-    });
+    //console.log("adding to firebase");
+    //myFirebaseRef.set({
+    //    title: "Hello World!",
+    //    author: "Firebase",
+    //    location: {
+    //        city: "San Francisco",
+    //        state: "California",
+    //        zip: 94103
+    //    }
+    //});
 
     smtpTransport.sendMail(mailOptions, function(err, res)
     {
@@ -64,6 +65,7 @@ app.get('/send', function(req, res)
             console.log(err);
         }
             console.log(res);
+
     });
 });
 
