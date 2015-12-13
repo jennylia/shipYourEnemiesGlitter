@@ -14,30 +14,36 @@
     <script>// <![CDATA[
     $(document).ready(function()
     {
-        var name,from, to, subject, text;
+        var name, num, to, text;
         $("#send_email").click(function()
         {
             name = $('#name').val();
+            num = $('#quantity').val();
             to = $('#to').val();
             text = $("#content").val();
+
             $("#message").text("Sending Email.... Please Wait");
-            setTimeout(function() {
+            setTimeout(function()
+            {
                 $("#message").fadeOut();
             }, 2000);
+
             $.get("http://localhost:3000/send",
                     {
                         to: to,
-                        text: text
+                        text: text,
+                        num: num,
                     }
                     , function(data)
                     {
                         if (data == "sent")
                         {
                             $("#message").empty().html("Email has been sent");
-                            setTimeout(function() {
+                            setTimeout(function()
+                            {
                                 $("#message").fadeOut();
                             }, 2000);
-                            
+
                         }
                     });
         });
@@ -46,19 +52,20 @@
 </head>
 
 <div id="container">
-    
+
     <div>
         <div class="col-md-6 form-area">
             <h1>Kitty Mail</h1>
+
             <div class="col-md-6">
                 <input id="name" class="form-control" type="text" placeholder="What's your Friend's Name?"/>
             </div>
             <div class="col-md-6">
                 <input id="to" class="form-control" type="text" placeholder="What's Your Friend's Email?"/>
             </div>
-            <div class="col-md-12">            
+            <div class="col-md-12">
                 <textarea id="content" class="form-control" cols="40" rows="5"></textarea>
-                <label>How Many Cats?</label><input type="number" name="quantity" min="1" max="20">
+                <label>How Many Cats?</label><input type="number" id="quantity" name="quantity" min="1" max="20">
             </div>
             <div class="col-md-12 text-right">
                 <button id="send_email" class="btn btn-default">Send Email</button>
@@ -71,11 +78,11 @@
 
             <script>
                 var ref = new Firebase('https://duckybomb.firebaseio.com/');
-                $("#send_email").click(function(){
+                $("#send_email").click(function()
+                {
                     name = $('#name').val();
                     to = $('#to').val();
                     text = $("#content").val();
-
                     ref.push({
                         name: name,
                         to: to,
@@ -85,7 +92,8 @@
                 });
 
                 //getting the logs
-                ref.on('child_added', function(snapshot){
+                ref.on('child_added', function(snapshot)
+                {
                     console.log(snapshot); // what is snapshot in thie case
                     var message = snapshot.val();
                     console.log(message.name);
@@ -93,8 +101,9 @@
                     displayChatMessage(message.name, message.text);
                 });
 
-                function displayChatMessage(name, text){
-                    $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#logDiv'));
+                function displayChatMessage(name, text)
+                {
+                    $('<div/>').text(text).prepend($('<em/>').text(name + ': ')).appendTo($('#logDiv'));
                 }
             </script>
         </div>
