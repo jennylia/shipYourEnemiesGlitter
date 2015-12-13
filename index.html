@@ -1,33 +1,39 @@
 <div id="container">
-	Node.JS EMAIL
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script>// <![CDATA[
-		$(document).ready(function(){
-			var from,to,subject,text;
-			$("#send_email").click(function(){
-				to = $('#to').val();
-				subject = $("#subject").val();
-				text=$("#content").val();
-				$("#message").text("Sending Email.... Please Wait");
-				$.get("http://localhost:3000/send",
-				{to: to,
-				subject: subject,
-				text: text}
-			,function(data){
-				if(data == "sent")
-				{
-					$("#message").empty().html("Email has been sent");
-				}
-			});
-		});
-	});
-	</script>
-	<div>
-		<h1>Mailer In Node.js</h1>
-		<input id="to" type="text" placeholder="enter you email address of recipient"/>
-		<input id="subject" type="text" placeholder="Write Subject Here"/>
-		<textarea id="content" cols="40" rows="5"></textarea>
-		<button id="send_email">Send Email</button>
-		<span id="message"></span>
-	</div>
+    Node.JS EMAIL
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
+    <script>// <![CDATA[
+    $(document).ready(function()
+    {
+        var from, to, subject, text;
+        $("#send_email").click(function()
+        {
+            to = $('#to').val();
+            subject = $("#subject").val();
+            text = $("#content").val();
+            $("#message").text("Sending Email.... Please Wait");
+            $.get("http://localhost:3000/send",
+                    {
+                        to: to,
+                        subject: subject,
+                        text: text
+                    }
+                    , function(data)
+                    {
+                        if (data == "sent")
+                        {
+                            $("#message").empty().html("Email has been sent");
+                        }
+                    });
+        });
+    });
+    </script>
+    <div>
+        <h1>Mailer In Node.js</h1>
+        <input id="to" type="text" placeholder="enter you email address of recipient"/>
+        <input id="subject" type="text" placeholder="Write Subject Here"/>
+        <textarea id="content" cols="40" rows="5"></textarea>
+        <button id="send_email">Send Email</button>
+        <span id="message"></span>
+    </div>
 </div>
