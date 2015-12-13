@@ -1,5 +1,6 @@
 <div id="container">
     Node.JS EMAIL
+    <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' rel='stylesheet'>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
     <script>// <![CDATA[
@@ -29,11 +30,17 @@
     });
     </script>
     <div>
-        <h1>Mailer In Node.js</h1>
-        <input id="to" type="text" placeholder="enter you email address of recipient"/>
-        <input id="subject" type="text" placeholder="Write Subject Here"/>
-        <textarea id="content" cols="40" rows="5"></textarea>
-        <button id="send_email">Send Email</button>
-        <span id="message"></span>
+        <div class="col-md-6">
+            <h1>Mailer In Node.js</h1>
+            <input id="name" type="text" placeholder="What's your Friend's Name?"/>
+            <input id="to" type="text" placeholder="What's Your Friend's Email?"/>
+            <label>How Many Cats</label><input type="number" name="quantity" min="1" max="20">
+            <textarea id="content" cols="40" rows="5"></textarea>
+            <button id="send_email">Send Email</button>
+            <span id="message"></span>
+        </div>
+        <div class="col-md-6">
+            Logging
+        </div>
     </div>
 </div>
