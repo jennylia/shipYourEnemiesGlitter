@@ -1,6 +1,14 @@
-<div id="container">
-    Node.JS EMAIL
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Kitty Bomb</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/style.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
     <script>// <![CDATA[
@@ -13,6 +21,9 @@
             to = $('#to').val();
             text = $("#content").val();
             $("#message").text("Sending Email.... Please Wait");
+            setTimeout(function() {
+                $("#message").fadeOut();
+            }, 2000);
             $.get("http://localhost:3000/send",
                     {
                         to: to,
@@ -23,14 +34,22 @@
                         if (data == "sent")
                         {
                             $("#message").empty().html("Email has been sent");
+                            setTimeout(function() {
+                                $("#message").fadeOut();
+                            }, 2000);
+                            
                         }
                     });
         });
     });
     </script>
+</head>
+
+<div id="container">
+    
     <div>
         <div class="col-md-6">
-            <h1>Mailer In Node.js</h1>
+            <h1>Kitty Mail</h1>
             <input id="name" type="text" placeholder="What's your Friend's Name?"/>
             <input id="to" type="text" placeholder="What's Your Friend's Email?"/>
             <label>How Many Cats</label><input type="number" name="quantity" min="1" max="20">
@@ -58,3 +77,4 @@
         </div>
     </div>
 </div>
+</html>
