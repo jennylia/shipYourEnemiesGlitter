@@ -1,4 +1,31 @@
-body {
-  background: red;
+$kittyRed: #8C3232;
+$kittyBlue: #2C4654;
 
+html, body {margin:0;padding:0;height:100%;}
+.form-area {
+  background: $kittyRed;
+  height: 100vh;
+  display: inline-block;
+  h1 {
+    color: white;
+  }
+  label {
+    color: white;
+    margin-right: 10px;
+  }
+  input {
+    margin-bottom: 10px;
+  }
+  textarea {
+    margin-bottom: 10px;
+  }
+}
+#container {
+  height: 100%;
+}
+.logging-area {
+  background: $kittyBlue;
+  height: 100vh;
+  display: inline-block;
+  color: white;
 }

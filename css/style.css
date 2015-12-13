@@ -1,3 +1,39 @@
-body {
-  background: red;
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.form-area {
+  background: #8C3232;
+  height: 100vh;
+  display: inline-block;
+}
+
+.form-area h1 {
+  color: white;
+}
+
+.form-area label {
+  color: white;
+  margin-right: 10px;
+}
+
+.form-area input {
+  margin-bottom: 10px;
+}
+
+.form-area textarea {
+  margin-bottom: 10px;
+}
+
+#container {
+  height: 100%;
+}
+
+.logging-area {
+  background: #2C4654;
+  height: 100vh;
+  display: inline-block;
+  color: white;
 }

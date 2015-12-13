@@ -49,16 +49,24 @@
 <div id="container">
     
     <div>
-        <div class="col-md-6">
+        <div class="col-md-6 form-area">
             <h1>Kitty Mail</h1>
-            <input id="name" type="text" placeholder="What's your Friend's Name?"/>
-            <input id="to" type="text" placeholder="What's Your Friend's Email?"/>
-            <label>How Many Cats</label><input type="number" name="quantity" min="1" max="20">
-            <textarea id="content" cols="40" rows="5"></textarea>
-            <button id="send_email">Send Email</button>
+            <div class="col-md-6">
+                <input id="name" class="form-control" type="text" placeholder="What's your Friend's Name?"/>
+            </div>
+            <div class="col-md-6">
+                <input id="to" class="form-control" type="text" placeholder="What's Your Friend's Email?"/>
+            </div>
+            <div class="col-md-12">            
+                <textarea id="content" class="form-control" cols="40" rows="5"></textarea>
+                <label>How Many Cats?</label><input type="number" name="quantity" min="1" max="20">
+            </div>
+            <div class="col-md-12 text-right">
+                <button id="send_email" class="btn btn-default">Send Email</button>
+            </div>
             <span id="message"></span>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 logging-area">
             Logging
         </div>
     </div>
