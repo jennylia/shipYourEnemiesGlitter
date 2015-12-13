@@ -4,6 +4,18 @@ var app = express();
 var Firebase = require("firebase");
 var myFirebaseRef = new Firebase("https://duckybomb.firebaseio.com/");
 
+// Create a callback which logs the current auth state
+function authDataCallback(authData) {
+  if (authData) {
+    console.log("User " + authData.uid + " is logged in with " + authData.provider);
+  } else {
+    console.log("User is logged out");
+  }
+}
+
+// Register the callback to be fired every time auth state changes
+myFirebaseRef.onAuth(authDataCallback);
+
 /*var smtpTransport = nodemailer.createTransport({
  service: "Gmail",
  auth: {
