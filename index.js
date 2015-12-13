@@ -31,6 +31,10 @@ app.get('/', function(req, res)
     res.sendfile('index.html');
 });
 
+app.get('/css/style.css', function(req, res){
+    res.sendfile('css/style.css');
+});
+
 app.get('/send', function(req, res)
 {
     console.log("sending email");
