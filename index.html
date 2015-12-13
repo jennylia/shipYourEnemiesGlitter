@@ -14,11 +14,11 @@
     <script>// <![CDATA[
     $(document).ready(function()
     {
-        var from, to, subject, text;
+        var name,from, to, subject, text;
         $("#send_email").click(function()
         {
+            name = $('#name').val();
             to = $('#to').val();
-            subject = $("#subject").val();
             text = $("#content").val();
             $("#message").text("Sending Email.... Please Wait");
             setTimeout(function() {
@@ -27,7 +27,6 @@
             $.get("http://localhost:3000/send",
                     {
                         to: to,
-                        subject: subject,
                         text: text
                     }
                     , function(data)
@@ -68,6 +67,21 @@
         </div>
         <div class="col-md-6 logging-area">
             Logging
+            <script>
+                var ref = new Firebase('https://duckybomb.firebaseio.com/');
+                $("#send_email").click(function(){
+                    name = $('#name').val();
+                    to = $('#to').val();
+                    text = $("#content").val();
+
+                    ref.push({
+                        name: name,
+                        to: to,
+                        text: text
+                    });
+
+                });
+            </script>
         </div>
     </div>
 </div>
