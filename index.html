@@ -59,6 +59,8 @@
         </div>
         <div class="col-md-6">
             Logging
+            <div id="logDiv"></div>
+
             <script>
                 var ref = new Firebase('https://duckybomb.firebaseio.com/');
                 $("#send_email").click(function(){
@@ -73,6 +75,19 @@
                     });
 
                 });
+
+                //getting the logs
+                ref.on('child_added', function(snapshot){
+                    console.log(snapshot); // what is snapshot in thie case
+                    var message = snapshot.val();
+                    console.log(message.name);
+                    console.log(message.text);
+                    displayChatMessage(message.name, message.text);
+                });
+
+                function displayChatMessage(name, text){
+                    $('<div/>').text(text).prepend($('<em/>').text(name+': ')).appendTo($('#logDiv'));
+                }
             </script>
         </div>
     </div>
