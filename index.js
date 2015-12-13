@@ -36,12 +36,13 @@ app.get('/send', function(req, res)
     console.log("sending email");
     console.log(req.query);
     console.log("req query end");
+    // do the var for html here
     var mailOptions = {
         from: 'Jenny',
         to: req.query.to,
         subject: req.query.subject,
         text: req.query.text,
-        html: '<b>Hello World</b>'
+        html: '<a href="http://thecatapi.com"><img src="http://thecatapi.com/api/images/get?format=src&type=gif"></a>'
     }
 
     console.log(mailOptions);
