@@ -2,6 +2,7 @@ var express = require('express');
 var nodemailer = require('nodemailer');
 var app = express();
 var Firebase = require("firebase");
+var myFirebaseRef = new Firebase("https://duckybomb.firebaseio.com/");
 
 /*var smtpTransport = nodemailer.createTransport({
  service: "Gmail",
@@ -21,13 +22,13 @@ var smtpTransport = nodemailer.createTransport({
 });
 
 app.get('/contacts', function(req,res){
-    res.sendFile('contacts.html');
+    res.sendfile('contacts.html');
 });
 
 
 app.get('/', function(req, res)
 {
-    res.sendFile('index.html');
+    res.sendfile('index.html');
 });
 
 app.get('/send', function(req, res)
@@ -44,6 +45,17 @@ app.get('/send', function(req, res)
     }
 
     console.log(mailOptions);
+    console.log("adding to firebase");
+    myFirebaseRef.set({
+        title: "Hello World!",
+        author: "Firebase",
+        location: {
+            city: "San Francisco",
+            state: "California",
+            zip: 94103
+        }
+    });
+
     smtpTransport.sendMail(mailOptions, function(err, res)
     {
         if (err)
