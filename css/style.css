@@ -8,6 +8,7 @@ html, body {
   background: #8C3232;
   height: 100vh;
   display: inline-block;
+  padding: 20px;
 }
 
 .form-area h1 {
@@ -27,13 +28,30 @@ html, body {
   margin-bottom: 10px;
 }
 
+.form-content {
+  display: none;
+}
+
 #container {
   height: 100%;
 }
 
 .logging-area {
+  padding: 20px;
   background: #2C4654;
   height: 100vh;
   display: inline-block;
   color: white;
+}
+
+#logoutButton {
+  display: none;
+}
+
+.btn-primary {
+  background-color: #2C4654;
+}
+
+.btn-danger {
+  background-color: #8C3232;
 }

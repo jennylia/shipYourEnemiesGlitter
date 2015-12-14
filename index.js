@@ -41,22 +41,26 @@ app.get('/send', function(req, res)
     console.log(req.query);
     console.log("req query end");
     // do the var for html here
-    var photos = req.query.num;
-
-    //generate the email body
-    var body = '<h1>' + req.query.text + '</h1>';
-    for (var i = 0; i < photos; i ++){
-        body += '<a href="http://thecatapi.com"><img src="http://thecatapi.com/api/images/get?format=src&type=gif"></a><br/>';
-    }
+    var photos = 1;
     var mailOptions = {
         from: 'Jenny',
         to: req.query.to,
         subject: "Funny cat mail",
         text: req.query.text,
-        html: body
+        html: '<a href="http://thecatapi.com"><img src="http://thecatapi.com/api/images/get?format=src&type=gif"></a>'
     }
 
     console.log(mailOptions);
+    //console.log("adding to firebase");
+    //myFirebaseRef.set({
+    //    title: "Hello World!",
+    //    author: "Firebase",
+    //    location: {
+    //        city: "San Francisco",
+    //        state: "California",
+    //        zip: 94103
+    //    }
+    //});
 
     smtpTransport.sendMail(mailOptions, function(err, res)
     {
@@ -64,7 +68,7 @@ app.get('/send', function(req, res)
         {
             console.log(err);
         }
-        console.log(res);
+            console.log(res);
 
     });
 });
