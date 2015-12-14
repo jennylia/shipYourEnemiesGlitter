@@ -14,30 +14,69 @@
     <script>// <![CDATA[
     $(document).ready(function()
     {
-        var name,from, to, subject, text;
+        var ref = new Firebase('https://duckybomb.firebaseio.com/');
+        $('#loginButton').on('click', function() {
+            ref.authWithOAuthPopup("google", function(error, authData) {
+                if (error) {
+                    console.log("Login Failed!", error);
+                } else {
+                    console.log("Authenticated successfully with payload:", authData);
+                    $("#logoutButton").show();
+                    $('.form-content').show();
+                }
+            });
+        });
+        $("#logoutButton").on('click', function() {
+            ref.unauth();
+            $("#loginButton").show();
+        });
+        // Create a callback which logs the current auth state
+        function authDataCallback(authData) {
+          if (authData) {
+            console.log("User " + authData.uid + " is logged in with " + authData.provider);
+            $('.form-content').show();
+            $('#loginButton').hide();
+            $('#logoutButton').show();
+          } else {
+            console.log("User is logged out");
+            // $('.form-content').show();
+            $('#loginButton').show();
+            $('#logoutButton').hide();
+          }
+        }
+        ref.onAuth(authDataCallback);
+                
+
+        var name, num, to, text;
         $("#send_email").click(function()
         {
             name = $('#name').val();
+            num = $('#quantity').val();
             to = $('#to').val();
             text = $("#content").val();
+
             $("#message").text("Sending Email.... Please Wait");
-            setTimeout(function() {
+            setTimeout(function()
+            {
                 $("#message").fadeOut();
             }, 2000);
+
             $.get("http://localhost:3000/send",
                     {
                         to: to,
-                        text: text
+                        text: text,
+                        num: num,
                     }
                     , function(data)
                     {
                         if (data == "sent")
                         {
                             $("#message").empty().html("Email has been sent");
-                            setTimeout(function() {
+                            setTimeout(function()
+                            {
                                 $("#message").fadeOut();
                             }, 2000);
-                            
+
                         }
                     });
         });
@@ -46,27 +85,40 @@
 </head>
 
 <div id="container">
-    
+
     <div>
         <div class="col-md-6 form-area">
-            <h1>Kitty Mail</h1>
-            <div class="col-md-6">
-                <input id="name" class="form-control" type="text" placeholder="What's your Friend's Name?"/>
+            <div class="row">
+                <button id="loginButton" class="btn btn-primary">Login</button>
             </div>
-            <div class="col-md-6">
-                <input id="to" class="form-control" type="text" placeholder="What's Your Friend's Email?"/>
+            <div class="form-content">
+                <h1>Kitty Mail</h1>
+
+                <div class="col-md-6">
+                    <input id="name" class="form-control" type="text" placeholder="What's your Friend's Name?"/>
+                </div>
+                <div class="col-md-6">
+                    <input id="to" class="form-control" type="text" placeholder="What's Your Friend's Email?"/>
+                </div>
+                <div class="col-md-12">            
+                    <textarea id="content" class="form-control" cols="40" rows="5" placeholder="Send a Personalized Message"></textarea>
+                    <label>How Many Cats?</label><input type="number" name="quantity" min="1" max="20">
+                </div>
+                <div class="col-md-12 text-right">
+                    <button id="send_email" class="btn btn-default">Send Email</button>
+                </div>
+                <span id="message"></span>
             </div>
-            <div class="col-md-12">            
-                <textarea id="content" class="form-control" cols="40" rows="5" placeholder="Send a Personalized Message"></textarea>
-                <label>How Many Cats?</label><input type="number" name="quantity" min="1" max="20">
-            </div>
-            <div class="col-md-12 text-right">
-                <button id="send_email" class="btn btn-default">Send Email</button>
-            </div>
-            <span id="message"></span>
         </div>
         <div class="col-md-6 logging-area">
-            <h1>Kitty Log</h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>Kitty Log</h1>
+                </div>
+                <div class="col-md-6">
+                    <button id="logoutButton" class="btn btn-danger">Logout</button>
+                </div>
+            </div>
             <div class="col-md-4">
                 <strong>Name</strong>
                 <div id="nameLog"></div>
@@ -83,11 +135,13 @@
 
             <script>
                 var ref = new Firebase('https://duckybomb.firebaseio.com/');
-                $("#send_email").click(function(){
+
+
+                $("#send_email").click(function()
+                {
                     name = $('#name').val();
                     to = $('#to').val();
                     text = $("#content").val();
-
                     ref.push({
                         name: name,
                         to: to,
@@ -97,7 +151,8 @@
                 });
 
                 //getting the logs
-                ref.on('child_added', function(snapshot){
+                ref.on('child_added', function(snapshot)
+                {
                     console.log(snapshot); // what is snapshot in thie case
                     var message = snapshot.val();
                     console.log(message.name);

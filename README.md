@@ -1,8 +1,10 @@
-# shipYourEnemiesGlitter
-shipYourEnemiesGlitter, just like https://shipyourenemiesglitter.com/
+#Kitty Mail
 # upcoming...
-Rename this to ducky bomb
-Checkout:
+
+Send real mails with cat Gifs :)
+MEOW
+
+For learning -- Checkout:
 
 for backend
 https://www.firebase.com/docs/web/quickstart.html
